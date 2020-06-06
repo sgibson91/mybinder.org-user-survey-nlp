@@ -1,2 +1,5 @@
 # mybinder.org-user-survey-nlp
-Using NLP on free form text responses to the mybinder.org user survey
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sgibson91/mybinder.org-user-survey-nlp/master?filepath=analyse-responses.ipynb)
+
+Apply Natural Language Processing to analyse responses to the mybinder.org user survey.

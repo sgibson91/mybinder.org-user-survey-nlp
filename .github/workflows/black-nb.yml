@@ -3,10 +3,10 @@ name: Apply Black formatting to Jupyter Notebooks
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   format-notebooks:

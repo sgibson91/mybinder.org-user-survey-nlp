@@ -1,0 +1,22 @@
+name: CI Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_requests:
+    branches:
+      - main
+
+jobs:
+  python-lint-format:
+    uses:
+      sgibson91/.github/.github/workflows/python-lint-format.yaml@main
+
+  clean-notebooks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2.3.5
+      - name: Check notebook outputs and metadata
+        uses: ResearchSoftwareActions/EnsureCleanNotebooksAction@1.1

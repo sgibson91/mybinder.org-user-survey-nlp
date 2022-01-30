@@ -9,6 +9,7 @@ on:
 
 jobs:
   autoupdate:
+    environment: precommit-autoupdate
     runs-on: ubuntu-latest
     steps:
       - name: Generate token

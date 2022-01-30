@@ -1,4 +1,4 @@
-name: Pre-commit auto-update dependencies
+name: Pre-commit autoupdate
 
 on:
   # every day at midnight
@@ -8,6 +8,34 @@ on:
   workflow_dispatch:
 
 jobs:
-  auto-update:
-    uses:
-      sgibson91/.github/.github/workflows/pre-commit-autoupdate.yaml@main
+  autoupdate:
+    environment: precommit-autoupdate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+  
+      - name: Checkout repo
+        uses: actions/checkout@v2.4.0
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2
+      
+      - name: Install pre-commit
+        run: python -m pip install pre-commit
+        
+      - name: Run pre-commit autoupdate
+        run: pre-commit autoupdate
+      
+      - name: Create a Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          branch: update/pre-commit-hooks
+          title: Update pre-commit hooks
+          commit-message: "MAINT: update pre-commit hooks"
+          body: Update pre-commit repos to latest versions.
